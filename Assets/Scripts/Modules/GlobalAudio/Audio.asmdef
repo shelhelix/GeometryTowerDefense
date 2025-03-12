@@ -1,0 +1,18 @@
+{
+    "name": "Audio",
+    "rootNamespace": "Com.Shelinc.GlobalAudio",
+    "references": [
+        "GUID:79a7faa1c5cfb45eda24319fef9286a4",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23",
+        "GUID:90dcd41b2020c2c429fb2d91a618c51c"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
