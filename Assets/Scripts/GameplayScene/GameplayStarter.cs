@@ -11,8 +11,6 @@ namespace Game.GameplayScene {
 		[Inject]
 		public void Init(BgmManager bgmManager) {
 			bgmManager.PlayBgms(Bgms);
-			
-			
 		}
 	}
 }
