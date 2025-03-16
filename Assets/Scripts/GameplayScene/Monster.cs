@@ -59,9 +59,6 @@ namespace Game.GameplayScene {
 			_sequence = DOTween.Sequence()
 				.Append(transform.DOScale(Vector3.zero, 0.5f))
 				.OnComplete(() => {
-					if ( !gameObject ) {
-						Debug.LogError("WAT!");
-					}
 					Destroy(gameObject);
 				});
 		}
