@@ -1,11 +1,17 @@
 ﻿using System.Collections.Generic;
 using DG.Tweening;
+using TriInspector;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Game.GameplayScene {
 	public class Monster : MonoBehaviour {
 		public float Speed;
+		public float Health;
+		
+		[ReadOnly]
+		public float CurrentHealth;
+		
 		bool          _isInited;
 		List<Vector3> _currentPath;
 
@@ -27,6 +33,14 @@ namespace Game.GameplayScene {
 			_sequence = DOTween.Sequence()
 				.Append(transform.DOScale(Vector3.one * 0.18f, .2f))
 				.Append(transform.DOScale(Vector3.one * 0.12f, .2f));
+			CurrentHealth = Health;
+		}
+
+		public void TakeDamage(float damage) {
+			CurrentHealth -= damage;
+			if ( CurrentHealth <= 0 ) {
+				Kill();
+			}
 		}
 
 		void OnDestroy() {
@@ -70,6 +84,6 @@ namespace Game.GameplayScene {
 
 		float GetTraverseTime(Vector3 sourcePoint, Vector3 targetPoint) => (targetPoint - sourcePoint).magnitude / Speed;
 
-		bool IsOnPoint(Vector3 point) => transform.position == point;
+		bool        IsOnPoint(Vector3 point) => transform.position == point;
 	}
 }
