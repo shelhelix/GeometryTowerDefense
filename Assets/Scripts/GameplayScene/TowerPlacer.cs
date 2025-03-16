@@ -22,6 +22,11 @@ namespace Game.GameplayScene {
 					Debug.LogError("Can't create tower here. Cell is already used.");
 					return;
 				}
+				if ( !GroundLayer.HasCell(cellPosition) ) {
+					Debug.LogError("Can't create tower here. Can't find a ground cell.");
+					return;
+				}
+				
 				if ( !Pathfinder.CanFindPath(SpawnPoint, EndPoint, new List<Vector3Int>{cellPosition}) ) {
 					Debug.LogError("Path will be blocked");
 					return;
