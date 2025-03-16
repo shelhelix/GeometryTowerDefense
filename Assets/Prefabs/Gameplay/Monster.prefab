@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 4
-  Health: 5
+  Health: 9999
   Collider: {fileID: 6329743255491390824}
   CurrentHealth: 0
 --- !u!212 &5147182659156692939

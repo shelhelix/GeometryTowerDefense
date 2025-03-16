@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game.GameplayScene {
 	public class MonsterSpawner : MonoBehaviour {
-		public Transform EndPoint;
-		public Monster   MonsterPrefab;
+		public Transform  EndPoint;
+		public Monster    MonsterPrefab;
+		public Pathfinder Pathfinder;
 		
 		public float SpawnInterval;
 
@@ -13,7 +13,8 @@ namespace Game.GameplayScene {
 		void Update() {
 			if ( _leftTime < 0 ) {
 				var monster = Instantiate(MonsterPrefab);
-				monster.Init(new List<Vector3> { transform.position, EndPoint.position});
+				var path = Pathfinder.FindPath(transform, EndPoint);
+				monster.Init(path);
 				_leftTime = SpawnInterval;
 			}
 			_leftTime -= Time.deltaTime;

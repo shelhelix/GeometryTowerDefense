@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game.GameplayScene {
 	public class Bullet : MonoBehaviour {

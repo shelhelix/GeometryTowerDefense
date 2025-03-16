@@ -2,7 +2,6 @@
 using DG.Tweening;
 using TriInspector;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Game.GameplayScene {
 	public class Monster : MonoBehaviour {
@@ -28,9 +27,6 @@ namespace Game.GameplayScene {
 			_isInited          = true;
 			_currentPath       = path;
 			transform.position = path[0];
-			// for testing
-			var randomPoint = new Vector3(Random.Range(-3f, 3f), Random.Range(-3f, 3f), 0);
-			path.Insert(1, randomPoint);
 
 			transform.localScale = Vector3.zero;
 			_sequence = DOTween.Sequence()

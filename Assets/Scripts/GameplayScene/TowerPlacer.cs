@@ -1,28 +1,36 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 namespace Game.GameplayScene {
 	public class TowerPlacer : MonoBehaviour {
-		public Tilemap    Map;
+		public MapLayer   GroundLayer;
+		public MapLayer   TowerLayer;
+		
+		public Pathfinder Pathfinder;
+		public Transform  SpawnPoint;
+		public Transform  EndPoint;
 
 		public GameObject TowerPrefab;
-
-		List<Vector3Int> _usedCells = new();
+		Grid Grid => GroundLayer.Grid;
 		
 		void Update() {
 			if ( Input.GetMouseButtonDown(0) ) {
 				var worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 				worldPosition.z = 0;
-				var cellPosition  = Map.WorldToCell(worldPosition);
-				if ( _usedCells.Contains(cellPosition) ) {
+				var cellPosition  = Grid.WorldToCell(worldPosition);
+				if ( TowerLayer.HasCell(cellPosition) ) {
 					Debug.LogError("Can't create tower here. Cell is already used.");
 					return;
 				}
-				var adjustedWorld = Map.CellToWorld(cellPosition);
-				adjustedWorld += Map.cellSize / 2;
-				Instantiate(TowerPrefab, adjustedWorld, Quaternion.identity, Map.transform);
-				_usedCells.Add(cellPosition);
+				if ( !Pathfinder.CanFindPath(SpawnPoint, EndPoint, new List<Vector3Int>{cellPosition}) ) {
+					Debug.LogError("Path will be blocked");
+					return;
+				}
+				
+				var adjustedWorld = Grid.CellToWorld(cellPosition);
+				adjustedWorld += Grid.cellSize / 2;
+				var cell = Instantiate(TowerPrefab, adjustedWorld, Quaternion.identity, GroundLayer.transform);
+				TowerLayer.AddCell(cell.transform);
 			}
 		}
 	}
