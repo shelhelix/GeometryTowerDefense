@@ -37,12 +37,12 @@ namespace Game.GameplayScene {
 			}
 			var monster = _monsters.First();
 			// look at 2d object
-			FireHead.up = (monster.transform.position - FireHead.position).normalized;
-			
-			// FireHead.right = (monster.transform.position - FireHead.position).normalized;
+			Vector3 direction = monster.transform.position - transform.position;
+			float   angle     = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+			FireHead.rotation = Quaternion.Euler(0, 0, angle - 90);
+
 			if ( _fireTime < 0 ) {
-				var bullet = Instantiate(BulletPrefab);
-				bullet.transform.position = FirePoint.position;
+				var bullet = Instantiate(BulletPrefab, FirePoint.position, Quaternion.identity);
 				bullet.Init(monster);
 				_fireTime = FireInterval;
 			}

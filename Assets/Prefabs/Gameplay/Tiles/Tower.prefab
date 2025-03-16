@@ -106,7 +106,7 @@ MonoBehaviour:
   FireHead: {fileID: 3356279533273680050}
   FirePoint: {fileID: 8757823264967833581}
   BulletPrefab: {fileID: -5144260593478429039, guid: 411aea6c1091afe469eb36e364730122, type: 3}
-  FireInterval: 0.01
+  FireInterval: 0.1
 --- !u!58 &8582298762315447164
 CircleCollider2D:
   m_ObjectHideFlags: 0

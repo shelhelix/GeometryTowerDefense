@@ -8,6 +8,8 @@ namespace Game.GameplayScene {
 	public class Monster : MonoBehaviour {
 		public float Speed;
 		public float Health;
+
+		public Collider2D Collider;
 		
 		[ReadOnly]
 		public float CurrentHealth;
@@ -18,9 +20,10 @@ namespace Game.GameplayScene {
 		int   _lastPointIndex;
 		float _progress;
 
-		Sequence _sequence;
-		bool     _isDying;
+		Sequence    _sequence;
 		
+		public bool IsDying { get; private set; }
+
 		public void Init(List<Vector3> path) {
 			_isInited          = true;
 			_currentPath       = path;
@@ -48,10 +51,11 @@ namespace Game.GameplayScene {
 		}
 
 		public void Kill() {
-			if ( _isDying ) {
+			if ( IsDying ) {
 				return;
 			}
-			_isDying = true;
+			IsDying          = true;
+			Collider.enabled = false;
 			_sequence = DOTween.Sequence()
 				.Append(transform.DOScale(Vector3.zero, 0.5f))
 				.OnComplete(() => {

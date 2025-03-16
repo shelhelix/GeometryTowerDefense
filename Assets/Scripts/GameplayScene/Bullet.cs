@@ -26,7 +26,7 @@ namespace Game.GameplayScene {
 		}
 
 		void Update() {
-			if ( !_monster ) {
+			if ( !_monster || _monster.IsDying ) {
 				return;
 			}
 			Rigidbody.linearVelocity = (_monster.transform.position - transform.position).normalized * Speed;
