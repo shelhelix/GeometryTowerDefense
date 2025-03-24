@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ namespace Game.GameplayScene {
 		public Bullet BulletPrefab;
 		
 		public float FireInterval;
+		public float AngularSpeed;
 
 		List<Monster> _monsters = new();
 
@@ -32,14 +34,25 @@ namespace Game.GameplayScene {
 		}
 
 		void Update() {
+			_monsters.RemoveAll(x => !x);
 			if ( _monsters.Count == 0 ) {
 				return;
 			}
 			var monster = _monsters.First();
+			
 			// look at 2d object
-			Vector3 direction = monster.transform.position - transform.position;
-			float   angle     = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-			FireHead.rotation = Quaternion.Euler(0, 0, angle - 90);
+			var direction    = monster.transform.position - transform.position;
+			var neededAngle  = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
+			var currentAngle = FireHead.rotation.eulerAngles.z;
+			if ( currentAngle > 180 ) {
+				currentAngle -= 360;
+			}
+			Debug.Log($"MOVING: {currentAngle} -> {neededAngle}");
+			var neededShift  = neededAngle - currentAngle;
+			var absDif       = Mathf.Abs(neededShift) ;
+			var angularShift = Mathf.Sign(neededShift) * Mathf.Min(AngularSpeed * Time.deltaTime, absDif);
+			Debug.Log("ABS: " + absDif + " MAX ANG SHIFT: " + AngularSpeed * Time.deltaTime + $" Needed shift {neededShift}");
+			FireHead.rotation = Quaternion.Euler(0, 0, currentAngle + angularShift);
 
 			if ( _fireTime < 0 ) {
 				var bullet = Instantiate(BulletPrefab, FirePoint.position, Quaternion.identity);
