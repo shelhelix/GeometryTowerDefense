@@ -1,23 +1,16 @@
-﻿using UnityEngine;
+﻿	using TriInspector;
+	using UnityEngine;
 
-namespace Game.GameplayScene {
+	namespace Game.GameplayScene {
 	public class MonsterSpawner : MonoBehaviour {
-		public Transform  EndPoint;
-		public Monster    MonsterPrefab;
-		public Pathfinder Pathfinder;
-		
-		public float SpawnInterval;
+		[Required] public PlayerTower    EndPoint;
+		[Required] public Pathfinder     Pathfinder;
 
-		float _leftTime;
-		
-		void Update() {
-			if ( _leftTime < 0 ) {
-				var monster = Instantiate(MonsterPrefab);
-				var path = Pathfinder.FindPath(transform, EndPoint);
-				monster.Init(path);
-				_leftTime = SpawnInterval;
-			}
-			_leftTime -= Time.deltaTime;
+		public void Spawn(Monster monsterPrefab) {
+			Debug.Log("Spawning monster");
+			var monster = Instantiate(monsterPrefab);
+			var path    = Pathfinder.FindPath(transform, EndPoint.transform);
+			monster.Init(path);
 		}
 		
 	}
