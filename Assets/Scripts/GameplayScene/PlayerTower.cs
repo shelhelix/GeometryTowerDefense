@@ -1,4 +1,5 @@
-﻿using TriInspector;
+﻿using System;
+using TriInspector;
 using UnityEngine;
 
 namespace Game.GameplayScene {
@@ -8,14 +9,20 @@ namespace Game.GameplayScene {
 		[ReadOnly]
 		public int CurrentLives;
 
-		public void Start() {
+		public event Action OnHealthAmountChanged;
+
+		public void Awake() {
 			CurrentLives = MaxLives;
 		}
 
 		void OnTriggerEnter2D(Collider2D other) {
-			CurrentLives--;
 			if ( other.TryGetComponent(out Monster monster) ) {
+				if ( monster.IsDying ) {
+					return;
+				}
 				monster.Kill();
+				CurrentLives--;
+				OnHealthAmountChanged?.Invoke();
 			}
 		}
 	}
