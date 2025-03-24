@@ -28,10 +28,11 @@ namespace Game.GameplayScene {
 			_currentPath       = path;
 			transform.position = path[0];
 
+			var initialScale = transform.localScale;
 			transform.localScale = Vector3.zero;
 			_sequence = DOTween.Sequence()
-				.Append(transform.DOScale(Vector3.one * 0.18f, .2f))
-				.Append(transform.DOScale(Vector3.one * 0.12f, .2f));
+				.Append(transform.DOScale(initialScale * 1.5f, .2f))
+				.Append(transform.DOScale(initialScale, .2f));
 			CurrentHealth = Health;
 		}
 
