@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2026729017829038353}
   - component: {fileID: 6538066139313937220}
+  - component: {fileID: 2480715719448608907}
   m_Layer: 0
   m_Name: SpawnTile
   m_TagString: Untagged
@@ -31,7 +32,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2680679594129855469}
-  - {fileID: 1185383496002281709}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6538066139313937220
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 9164125038473637992, guid: 6c411bfc0ed85fb46b32ad57db68a49c, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
@@ -89,51 +89,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &4461711835125700103
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1185383496002281709}
-  - component: {fileID: 4406250581363830467}
-  m_Layer: 0
-  m_Name: Pathfinder
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1185383496002281709
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4461711835125700103}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.6979923, y: -0.7812178, z: -9.92726}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2026729017829038353}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4406250581363830467
+--- !u!114 &2480715719448608907
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4461711835125700103}
+  m_GameObject: {fileID: 2790237249931743015}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4e3ea85880a4d61b485052f6028fc73, type: 3}
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Grid: {fileID: 0}
+  m_Events:
+    m_Signals: []
+    m_Events: []
 --- !u!1 &7131307163794182255
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,6 +149,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EndPoint: {fileID: 0}
-  MonsterPrefab: {fileID: 1392138311695822896, guid: 4ed0b6bd759db084aa654c3b0527238a, type: 3}
-  Pathfinder: {fileID: 4406250581363830467}
-  SpawnInterval: 1
+  Pathfinder: {fileID: 0}
