@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Game.GameplayScene {
 	public class TowerPlacer : MonoBehaviour {
@@ -17,6 +18,10 @@ namespace Game.GameplayScene {
 			if ( !Input.GetMouseButtonDown(0) ) {
 				return;
 			}
+			if ( EventSystem.current.IsPointerOverGameObject() ) {
+				return;
+			}
+			
 			var worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			worldPosition.z = 0;
 			var cellPosition  = Grid.WorldToCell(worldPosition);
