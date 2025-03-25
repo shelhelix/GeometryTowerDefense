@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -47,11 +46,9 @@ namespace Game.GameplayScene {
 			if ( currentAngle > 180 ) {
 				currentAngle -= 360;
 			}
-			Debug.Log($"MOVING: {currentAngle} -> {neededAngle}");
 			var neededShift  = neededAngle - currentAngle;
 			var absDif       = Mathf.Abs(neededShift) ;
 			var angularShift = Mathf.Sign(neededShift) * Mathf.Min(AngularSpeed * Time.deltaTime, absDif);
-			Debug.Log("ABS: " + absDif + " MAX ANG SHIFT: " + AngularSpeed * Time.deltaTime + $" Needed shift {neededShift}");
 			FireHead.rotation = Quaternion.Euler(0, 0, currentAngle + angularShift);
 
 			if ( _fireTime < 0 ) {

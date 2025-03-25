@@ -20,12 +20,20 @@ namespace Game.GameplayScene {
 		float _progress;
 
 		Sequence    _sequence;
+
+		BattleManager _battleManager;
 		
 		public bool IsDying { get; private set; }
 
-		public void Init(List<Vector3> path) {
+		public void Init(BattleManager battleManager, List<Vector3> path) {
+			if ( path.Count == 0 ) {
+				Debug.LogError("Something strange happened. Path is empty. Can't init monster");
+				return;
+			}
+			
 			_isInited          = true;
 			_currentPath       = path;
+			_battleManager     = battleManager;
 			transform.position = path[0];
 
 			var initialScale = transform.localScale;
@@ -34,6 +42,8 @@ namespace Game.GameplayScene {
 				.Append(transform.DOScale(initialScale * 1.5f, .2f))
 				.Append(transform.DOScale(initialScale, .2f));
 			CurrentHealth = Health;
+			
+			_battleManager.RegisterMonsterSpawn();
 		}
 
 		public void TakeDamage(float damage) {
@@ -45,6 +55,7 @@ namespace Game.GameplayScene {
 
 		void OnDestroy() {
 			_sequence?.Kill();
+			_battleManager.RegisterMonsterDeath();
 		}
 
 		public void Kill() {

@@ -1,15 +1,11 @@
-﻿using System;
-using TriInspector;
+﻿using TriInspector;
 using UnityEngine;
 
 namespace Game.GameplayScene {
 	public class PlayerTower : MonoBehaviour {
 		public int MaxLives;
 		
-		[ReadOnly]
-		public int CurrentLives;
-
-		public event Action OnHealthAmountChanged;
+		[ReadOnly] public int CurrentLives;
 
 		public void Awake() {
 			CurrentLives = MaxLives;
@@ -22,7 +18,6 @@ namespace Game.GameplayScene {
 				}
 				monster.Kill();
 				CurrentLives--;
-				OnHealthAmountChanged?.Invoke();
 			}
 		}
 	}
