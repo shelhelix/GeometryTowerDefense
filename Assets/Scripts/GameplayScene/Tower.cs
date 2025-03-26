@@ -1,11 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.VFX;
 
 namespace Game.GameplayScene {
 	public class Tower : MonoBehaviour {
 		public Transform FireHead;
 		public Transform FirePoint;
+		
+		public Transform    BaseView;
+		public VisualEffect VisualEffect;
 		
 		public Bullet BulletPrefab;
 		
@@ -15,7 +21,20 @@ namespace Game.GameplayScene {
 		List<Monster> _monsters = new();
 
 		float _fireTime;
-		
+
+		Sequence _sequence;
+
+		public void Init() {
+			var initialScale = BaseView.localScale;
+			_sequence = DOTween.Sequence()
+				.Append(BaseView.DOScale(initialScale * 1f, .4f).From(0).SetEase(Ease.OutSine));
+			VisualEffect.Play();
+		}
+
+		protected void OnDestroy() {
+			_sequence?.Kill();
+		}
+
 		void OnTriggerEnter2D(Collider2D other) {
 			var monster = other.GetComponent<Monster>();
 			if (!monster) {

@@ -5945,7 +5945,7 @@ MonoBehaviour:
   - {fileID: 983828466}
   - {fileID: 261132532}
   EndPoint: {fileID: 603057299}
-  TowerPrefab: {fileID: 1537529490709059583, guid: 76858c13523c2a44a8293c6e0e6b808d, type: 3}
+  TowerPrefab: {fileID: 7932716902731356048, guid: 76858c13523c2a44a8293c6e0e6b808d, type: 3}
 --- !u!4 &2083452394
 Transform:
   m_ObjectHideFlags: 0
