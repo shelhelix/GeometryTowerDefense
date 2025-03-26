@@ -2199,7 +2199,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 628856231678677486, guid: 198b3b5ffb29f184caf50fea15d97995, type: 3}
       propertyPath: m_Name
-      value: x1
+      value: TimeScaleButton
       objectReference: {fileID: 0}
     - target: {fileID: 1808025240223951407, guid: 198b3b5ffb29f184caf50fea15d97995, type: 3}
       propertyPath: DesiredTimeScale
@@ -3610,11 +3610,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 628856231678677486, guid: 198b3b5ffb29f184caf50fea15d97995, type: 3}
       propertyPath: m_Name
-      value: x2
+      value: TimeScaleButton
       objectReference: {fileID: 0}
     - target: {fileID: 1808025240223951407, guid: 198b3b5ffb29f184caf50fea15d97995, type: 3}
       propertyPath: DesiredTimeScale
-      value: 2
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 7112054830316380266, guid: 198b3b5ffb29f184caf50fea15d97995, type: 3}
       propertyPath: m_Pivot.x
@@ -5981,7 +5981,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 628856231678677486, guid: 198b3b5ffb29f184caf50fea15d97995, type: 3}
       propertyPath: m_Name
-      value: x0.5
+      value: TimeScaleButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 1808025240223951407, guid: 198b3b5ffb29f184caf50fea15d97995, type: 3}
+      propertyPath: DesiredTimeScale
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 7112054830316380266, guid: 198b3b5ffb29f184caf50fea15d97995, type: 3}
       propertyPath: m_Pivot.x
