@@ -5,21 +5,33 @@ namespace Game.GameplayScene {
 	public class MapLayer : MonoBehaviour {
 		public Grid Grid;
 		
-		Dictionary<Vector3Int, Transform> _cells = new();
+		public Dictionary<Vector3Int, Transform> Cells = new();
 		
-		void Start() {
+		public void Init() {
 			foreach ( Transform child in transform) {
 				var gridCoords = Grid.WorldToCell(child.position);
-				_cells[gridCoords] = child;
+				Cells[gridCoords] = child;
 			}
 		}
 		
-		public bool HasCell(Vector3Int coords) => _cells.ContainsKey(coords);
+		public bool HasCell(Vector3Int coords) => Cells.ContainsKey(coords);
 		
 		public void AddCell(Transform cell) {
 			var coords = Grid.WorldToCell(cell.position);
-			_cells[coords] = cell;
+			Cells[coords] = cell;
 			cell.SetParent(transform);
+		}
+
+		public Transform GetCell(Vector3Int position) => Cells.GetValueOrDefault(position);
+
+		public BoundsInt GetBounds() {
+			var min = Vector3Int.zero;
+			var max = Vector3Int.zero;
+			foreach ( var cellInfoPair in Cells ) {
+				min = Vector3Int.Min(min, cellInfoPair.Key);
+				max = Vector3Int.Max(max, cellInfoPair.Key);
+			}
+			return new BoundsInt(min, max - min);
 		}
 	}
 }

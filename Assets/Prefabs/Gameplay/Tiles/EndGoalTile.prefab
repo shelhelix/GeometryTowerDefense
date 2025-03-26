@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6274122000692312659}
   - component: {fileID: 5842142731168325637}
   - component: {fileID: 7877642357314483098}
+  - component: {fileID: 8017332125085014038}
   m_Layer: 0
   m_Name: EndGoalTile
   m_TagString: Untagged
@@ -177,3 +178,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 3
+--- !u!114 &8017332125085014038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2790237249931743015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2961883dfd44bf988efdbefc56c8595, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

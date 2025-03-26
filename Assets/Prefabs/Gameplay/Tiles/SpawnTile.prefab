@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2026729017829038353}
   - component: {fileID: 6538066139313937220}
-  - component: {fileID: 2480715719448608907}
+  - component: {fileID: 1024305889554173960}
   m_Layer: 0
   m_Name: SpawnTile
   m_TagString: Untagged
@@ -89,7 +89,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2480715719448608907
+--- !u!114 &1024305889554173960
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -98,12 +98,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2790237249931743015}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Script: {fileID: 11500000, guid: b2961883dfd44bf988efdbefc56c8595, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Events:
-    m_Signals: []
-    m_Events: []
 --- !u!1 &7131307163794182255
 GameObject:
   m_ObjectHideFlags: 0

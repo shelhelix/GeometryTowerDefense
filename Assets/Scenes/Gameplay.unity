@@ -1336,6 +1336,7 @@ GameObject:
   m_Component:
   - component: {fileID: 472560981}
   - component: {fileID: 472560982}
+  - component: {fileID: 472560983}
   m_Layer: 0
   m_Name: SceneStarter
   m_TagString: Untagged
@@ -1371,6 +1372,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Bgms: []
+  mapShowAnimation: {fileID: 472560983}
+  Layers:
+  - {fileID: 1451098373}
+  - {fileID: 1597511774}
+--- !u!114 &472560983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 472560980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2675c4bb4faa447c8c5ccb89c04182fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BackgroundLayer: {fileID: 1451098373}
+  TowerLayer: {fileID: 1597511774}
 --- !u!4 &486397347 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2026729017829038353, guid: 86c07b791ce1af74488f2d37b04560c2, type: 3}
