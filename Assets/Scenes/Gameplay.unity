@@ -1372,7 +1372,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Bgms: []
-  mapShowAnimation: {fileID: 472560983}
+  mapAnimator: {fileID: 472560983}
   Layers:
   - {fileID: 1451098373}
   - {fileID: 1597511774}
@@ -1390,6 +1390,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BackgroundLayer: {fileID: 1451098373}
   TowerLayer: {fileID: 1597511774}
+  te: 0
 --- !u!4 &486397347 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2026729017829038353, guid: 86c07b791ce1af74488f2d37b04560c2, type: 3}
