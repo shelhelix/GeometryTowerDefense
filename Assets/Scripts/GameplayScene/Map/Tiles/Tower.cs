@@ -1,23 +1,22 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using DG.Tweening;
+﻿using DG.Tweening;
+using TriInspector;
 using UnityEngine;
 using UnityEngine.VFX;
 
 namespace Game.GameplayScene {
 	public class Tower : MonoBehaviour {
-		public Transform FireHead;
-		public Transform FirePoint;
+		[Required] public Transform FireHead;
+		[Required] public Transform FirePoint;
+
+		[Required] public TowerTargetingModule TargetingModule;
 		
-		public Transform    BaseView;
-		public VisualEffect VisualEffect;
+		[Required] public Transform    BaseView;
+		[Required] public VisualEffect VisualEffect;
 		
-		public Bullet BulletPrefab;
+		[Required] public Bullet BulletPrefab;
 		
 		public float FireInterval;
 		public float AngularSpeed;
-
-		List<Monster> _monsters = new();
 
 		float _fireTime;
 
@@ -33,32 +32,13 @@ namespace Game.GameplayScene {
 		protected void OnDestroy() {
 			_sequence?.Kill();
 		}
-
-		void OnTriggerEnter2D(Collider2D other) {
-			var monster = other.GetComponent<Monster>();
-			if (!monster) {
-				return;
-			}
-			_monsters.Add(monster);
-		}
-
-		void OnTriggerExit2D(Collider2D other) {
-			var monster = other.GetComponent<Monster>();
-			if (!monster) {
-				return;
-			}
-			_monsters.Remove(monster);
-		}
-
 		void Update() {
-			_monsters.RemoveAll(x => !x);
-			if ( _monsters.Count == 0 ) {
+			var target = TargetingModule.CurrentTarget;
+			if ( !target ) {
 				return;
 			}
-			var monster = _monsters.First();
-			
 			// look at 2d object
-			var direction    = monster.transform.position - transform.position;
+			var direction    = target.transform.position - transform.position;
 			var neededAngle  = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
 			var currentAngle = FireHead.rotation.eulerAngles.z;
 			if ( currentAngle > 180 ) {
@@ -71,7 +51,7 @@ namespace Game.GameplayScene {
 
 			if ( _fireTime < 0 ) {
 				var bullet = Instantiate(BulletPrefab, FirePoint.position, Quaternion.identity);
-				bullet.Init(monster);
+				bullet.Init(target);
 				_fireTime = FireInterval;
 			}
 			_fireTime -= Time.deltaTime;

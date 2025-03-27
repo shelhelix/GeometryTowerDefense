@@ -6,7 +6,7 @@ using TriInspector;
 using UnityEngine;
 
 namespace Game.GameplayScene {
-	public class MapShowAnimation : MonoBehaviour {
+	public class MapAnimator : MonoBehaviour {
 		[Required] public MapLayer BackgroundLayer;
 		[Required] public MapLayer TowerLayer;
 		

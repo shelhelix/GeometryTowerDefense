@@ -8,7 +8,7 @@ using VContainer;
 namespace Game.GameplayScene {
 	public class GameplayStarter : MonoBehaviour {
 		[Required] public List<AudioClip> Bgms;
-		[Required] public MapShowAnimation  mapShowAnimation;
+		[Required] public MapAnimator  mapAnimator;
 
 		[Required] public List<MapLayer> Layers;
 
@@ -18,7 +18,7 @@ namespace Game.GameplayScene {
 				layer.Init();
 			}
 			bgmManager.PlayBgms(Bgms);
-			mapShowAnimation.ShowField().Forget();
+			mapAnimator.ShowField().Forget();
 		}
 	}
 }

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1704986834246279506}
   - component: {fileID: 7932716902731356048}
+  - component: {fileID: 4407914267371800746}
   - component: {fileID: 8582298762315447164}
   - component: {fileID: 5911725102806768181}
   m_Layer: 6
@@ -50,11 +51,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FireHead: {fileID: 3356279533273680050}
   FirePoint: {fileID: 8757823264967833581}
+  TargetingModule: {fileID: 4407914267371800746}
   BaseView: {fileID: 7382675500498044876}
   VisualEffect: {fileID: 8720443735710760871}
   BulletPrefab: {fileID: -5144260593478429039, guid: 411aea6c1091afe469eb36e364730122, type: 3}
   FireInterval: 0.1
   AngularSpeed: 999
+--- !u!114 &4407914267371800746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1537529490709059583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72dcd3a0ae86450c93f3abea421714c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!58 &8582298762315447164
 CircleCollider2D:
   m_ObjectHideFlags: 0
