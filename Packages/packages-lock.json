@@ -379,7 +379,7 @@
       }
     },
     "com.unity.visualeffectgraph": {
-      "version": "16.0.6",
+      "version": "17.0.3",
       "depth": 0,
       "source": "builtin",
       "dependencies": {
