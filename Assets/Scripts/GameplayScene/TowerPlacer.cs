@@ -11,8 +11,10 @@ namespace Game.GameplayScene {
 		public List<MonsterSpawner> SpawnPoints;
 		public Transform            EndPoint;
 
-		public Tower TowerPrefab;
-		Grid Grid => GroundLayer.Grid;
+		public Tower     TowerPrefab;
+		public BeanTower BeanTowerPrefab;
+		
+		Grid             Grid => GroundLayer.Grid;
 		
 		void Update() {
 			if ( !Input.GetMouseButtonDown(0) ) {
@@ -43,7 +45,7 @@ namespace Game.GameplayScene {
 				
 			var adjustedWorld = Grid.CellToWorld(cellPosition);
 			adjustedWorld += Grid.cellSize / 2;
-			var cell = Instantiate(TowerPrefab, adjustedWorld, Quaternion.identity, GroundLayer.transform);
+			var cell = Instantiate(BeanTowerPrefab, adjustedWorld, Quaternion.identity, GroundLayer.transform);
 			cell.Init();
 			TowerLayer.AddCell(cell.transform);
 		}

@@ -4,29 +4,32 @@ using UnityEngine;
 using UnityEngine.VFX;
 
 namespace Game.GameplayScene {
-	public class Tower : MonoBehaviour {
+	public class BeanTower : MonoBehaviour {
 		[Required] public Transform FireHead;
 		[Required] public Transform FirePoint;
 
 		[Required] public TowerTargetingModule TargetingModule;
 		
 		[Required] public Transform    BaseView;
-		[Required] public VisualEffect VisualEffect;
+		[Required] public VisualEffect TowerAppearVfx;
+
+		[Required] public VisualEffect LaserBeamVfx;
 		
-		[Required] public Bullet BulletPrefab;
+		public LayerMask LaserBeamCollisionLayerMask;
 		
-		public float FireInterval;
 		public float AngularSpeed;
+		public float DPS;
 
 		float _fireTime;
 
 		Sequence _sequence;
-
+		
+		
 		public void Init() {
 			var initialScale = BaseView.localScale;
 			_sequence = DOTween.Sequence()
 				.Append(BaseView.DOScale(initialScale * 1f, .4f).From(0).SetEase(Ease.OutSine));
-			VisualEffect.Play();
+			TowerAppearVfx.Play();
 		}
 
 		protected void OnDestroy() {
@@ -35,17 +38,27 @@ namespace Game.GameplayScene {
 		void Update() {
 			var target = TargetingModule.CurrentTarget;
 			if ( !target ) {
+				LaserBeamVfx.gameObject.SetActive(false);
 				return;
 			}
-			// look at 2d object
+			
 			RotateTowerTowardsTarget(target);
-			if ( _fireTime < 0 ) {
-				var bullet = Instantiate(BulletPrefab, FirePoint.position, Quaternion.identity);
-				bullet.Init(target);
-				_fireTime = FireInterval;
+			var forward = FireHead.up; 
+			Debug.Log(forward);
+			var hit      = Physics2D.Raycast(FirePoint.position, forward, float.MaxValue, LaserBeamCollisionLayerMask);
+			if ( hit.collider ) {
+				Debug.Log(hit.distance);
+				Debug.Log(hit.collider.gameObject.name);
+				LaserBeamVfx.SetFloat(Shader.PropertyToID("Distance"), hit.distance);
+				LaserBeamVfx.gameObject.SetActive(true);
+				var monster = hit.collider.GetComponent<Monster>();
+				monster.TakeDamage(DPS * Time.deltaTime);
+			} else {
+				LaserBeamVfx.gameObject.SetActive(false);
 			}
-			_fireTime -= Time.deltaTime;
 		}
+		
+		
 
 		void RotateTowerTowardsTarget(Monster target) {
 			var direction    = target.transform.position - transform.position;
