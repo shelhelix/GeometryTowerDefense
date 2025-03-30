@@ -63,10 +63,10 @@ namespace Game.GameplayScene {
 		void RotateTowerTowardsTarget(Monster target) {
 			var direction    = target.transform.position - transform.position;
 			var neededAngle  = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
-			var currentAngle = FireHead.rotation.eulerAngles.z;
-			if ( currentAngle > 180 ) {
-				currentAngle -= 360;
+			if (neededAngle < 0) {
+				neededAngle += 360;
 			}
+			var currentAngle = FireHead.rotation.eulerAngles.z;
 			var neededShift  = neededAngle - currentAngle;
 			var absDif       = Mathf.Abs(neededShift) ;
 			var angularShift = Mathf.Sign(neededShift) * Mathf.Min(AngularSpeed * Time.deltaTime, absDif);
