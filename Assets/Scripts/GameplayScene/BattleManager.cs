@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TriInspector;
 using UnityEngine;
 using UnityEngine.Playables;
@@ -18,7 +19,9 @@ namespace Game.GameplayScene {
 		[Required] public PlayerTower PlayerTower;
 		[ReadOnly] public float       LeftPreparationTime;
 		[ReadOnly] public State       CurrentState;
+		
 		[ReadOnly] public int         CurrentWaveIndex;
+		
 		
 		int _activeMonstersCount;
 

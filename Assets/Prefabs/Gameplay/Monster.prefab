@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 4
   Health: 10
+  MoneyForKill: 1
   Collider: {fileID: 6329743255491390824}
   CurrentHealth: 999999
 --- !u!212 &5147182659156692939

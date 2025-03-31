@@ -10,9 +10,9 @@ namespace Game.GameplayScene {
 		
 		protected override void Configure(IContainerBuilder builder) {
 			builder.Register<SceneLoader>(Lifetime.Scoped);
+			builder.Register<CurrencyManager>(Lifetime.Scoped);
 			builder.RegisterInstance(BattleManager);
 			builder.RegisterEntryPoint<GameplayStarter>();
-			
 		}
 	}
 }

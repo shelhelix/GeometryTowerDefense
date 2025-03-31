@@ -7,6 +7,7 @@ namespace Game.GameplayScene {
 	public class Monster : MonoBehaviour {
 		public float Speed;
 		public float Health;
+		public int   MoneyForKill;
 
 		public Collider2D Collider;
 		
@@ -21,16 +22,17 @@ namespace Game.GameplayScene {
 
 		Sequence    _sequence;
 
-		BattleManager _battleManager;
+		BattleManager   _battleManager;
+		CurrencyManager _currencyManager;
 		
 		public bool IsDying { get; private set; }
 
-		public void Init(BattleManager battleManager, List<Vector3> path) {
+		public void Init(BattleManager battleManager, CurrencyManager currencyManager, List<Vector3> path) {
 			if ( path.Count == 0 ) {
 				Debug.LogError("Something strange happened. Path is empty. Can't init monster");
 				return;
 			}
-			
+			_currencyManager   = currencyManager;
 			_isInited          = true;
 			_currentPath       = path;
 			_battleManager     = battleManager;
@@ -63,6 +65,7 @@ namespace Game.GameplayScene {
 				return;
 			}
 			IsDying          = true;
+			_currencyManager.AddGold(MoneyForKill);
 			Collider.enabled = false;
 			_sequence = DOTween.Sequence()
 				.Append(transform.DOScale(Vector3.zero, 0.5f))
