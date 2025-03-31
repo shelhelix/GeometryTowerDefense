@@ -13,18 +13,19 @@ namespace Game.GameplayScene {
 	
 	public class BattleManager : MonoBehaviour {
 		[Required] public DefeatScreen DefeatScreen;
+		[Required] public DefeatScreen WinScreen;
 		
 		[Required] public List<PlayableDirector> BattleWaves;
-		public float                  PreparationTimeSec;
+
+		public float PreparationTimeSec;
 
 		[Required] public PlayerTower PlayerTower;
 		[ReadOnly] public float       LeftPreparationTime;
 		[ReadOnly] public State       CurrentState;
-		
-		[ReadOnly] public int          CurrentWaveIndex;
+
+		[ReadOnly] public int CurrentWaveIndex;
 
 		int _activeMonstersCount;
-
 
 		bool _isSpawnFinished;
 
@@ -40,21 +41,16 @@ namespace Game.GameplayScene {
 			_activeMonstersCount--;
 		}
 
-		public void LoseGame() {
-			
-		}
-
 		void Start() {
 			StartPreparation(false);
 		}
 
 		protected void Update() {
-			if ( (PlayerTower.CurrentLives <= 0) && (CurrentState != State.Lost) ) {
-				CurrentState   = State.Lost;
-				Time.timeScale = 1;
-				CurrentDirector.Stop();
-				DefeatScreen.Show();
+			if ( !IsPlaying ) {
 				return;
+			}
+			if ( PlayerTower.CurrentLives <= 0 ) {
+				LoseGame();
 			}
 			if ( CurrentState == State.Preparation ) {
 				ProcessPreparation();
@@ -71,6 +67,13 @@ namespace Game.GameplayScene {
 			}
 		}
 
+		void LoseGame() {
+			CurrentState   = State.Lost;
+			Time.timeScale = 1;
+			CurrentDirector.Stop();
+			DefeatScreen.Show();
+		}
+
 		void ProcessBattle() {
 			if ( (_activeMonstersCount != 0) || !_isSpawnFinished ) {
 				return;
@@ -78,12 +81,15 @@ namespace Game.GameplayScene {
 			if ((CurrentWaveIndex + 1) < BattleWaves.Count) {
 				StartPreparation();
 			} else {
-				FinishBattle();
+				WinGame();
 			}
 		}
 
-		void FinishBattle() {
+		void WinGame() {
 			CurrentState = State.Won;
+			Time.timeScale = 1;
+			CurrentDirector.Stop();
+			WinScreen.Show();
 		}
 		
 		void StartBattle() {
