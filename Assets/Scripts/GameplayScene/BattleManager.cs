@@ -50,7 +50,8 @@ namespace Game.GameplayScene {
 
 		protected void Update() {
 			if ( (PlayerTower.CurrentLives <= 0) && (CurrentState != State.Lost) ) {
-				CurrentState = State.Lost;
+				CurrentState   = State.Lost;
+				Time.timeScale = 1;
 				CurrentDirector.Stop();
 				DefeatScreen.Show();
 				return;
