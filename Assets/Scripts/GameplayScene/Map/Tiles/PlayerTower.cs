@@ -1,12 +1,13 @@
 ﻿using TriInspector;
 using UnityEngine;
+using VContainer;
 
 namespace Game.GameplayScene {
 	public class PlayerTower : MonoBehaviour {
 		public int MaxLives;
 		
 		[ReadOnly] public int CurrentLives;
-
+		
 		public void Awake() {
 			CurrentLives = MaxLives;
 		}

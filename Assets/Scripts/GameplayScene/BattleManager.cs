@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TriInspector;
 using UnityEngine;
 using UnityEngine.Playables;
@@ -13,6 +12,8 @@ namespace Game.GameplayScene {
 	}
 	
 	public class BattleManager : MonoBehaviour {
+		[Required] public DefeatScreen DefeatScreen;
+		
 		[Required] public List<PlayableDirector> BattleWaves;
 		public float                  PreparationTimeSec;
 
@@ -20,14 +21,16 @@ namespace Game.GameplayScene {
 		[ReadOnly] public float       LeftPreparationTime;
 		[ReadOnly] public State       CurrentState;
 		
-		[ReadOnly] public int         CurrentWaveIndex;
-		
-		
+		[ReadOnly] public int          CurrentWaveIndex;
+
 		int _activeMonstersCount;
 
-		PlayableDirector CurrentDirector => BattleWaves[CurrentWaveIndex];
 
 		bool _isSpawnFinished;
+
+		public bool IsPlaying => (CurrentState != State.Lost) && (CurrentState != State.Won);
+		
+		PlayableDirector CurrentDirector => BattleWaves[CurrentWaveIndex];
 		
 		public void RegisterMonsterSpawn() {
 			_activeMonstersCount++;
@@ -37,13 +40,19 @@ namespace Game.GameplayScene {
 			_activeMonstersCount--;
 		}
 
+		public void LoseGame() {
+			
+		}
+
 		void Start() {
 			StartPreparation(false);
 		}
 
 		protected void Update() {
-			if ( PlayerTower.CurrentLives <= 0 ) {
+			if ( (PlayerTower.CurrentLives <= 0) && (CurrentState != State.Lost) ) {
 				CurrentState = State.Lost;
+				CurrentDirector.Stop();
+				DefeatScreen.Show();
 				return;
 			}
 			if ( CurrentState == State.Preparation ) {

@@ -4,6 +4,7 @@
     "com.cysharp.unitask": "2.5.0",
     "com.ems.main-scene-auto-loading": "https://github.com/shelhelix/unity-main-scene-auto-loading-fork.git?path=/Packages/Ems.MainSceneAutoLoading",
     "com.jsteinhauer.unitydomainreloadhelper": "https://github.com/joshcamas/unity-domain-reload-helper.git",
+    "com.luca3317.tmpeffects": "https://github.com/Luca3317/TMPEffects.git?path=/Package",
     "com.singularitygroup.hotreload": "git+https://gitlab.hotreload.net/root/hot-reload-releases.git#1.13.0",
     "com.ultrashel.asynctimer": "https://github.com/shelhelix/AsyncTimer.git",
     "com.ultrashel.gamecomponentattributes": "https://github.com/shelhelix/GameComponentAttributes.git",

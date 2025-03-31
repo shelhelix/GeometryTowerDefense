@@ -49,6 +49,9 @@ namespace Game.GameplayScene {
 		}
 
 		public void TakeDamage(float damage) {
+			if ( !_battleManager.IsPlaying ) {
+				return;
+			}
 			CurrentHealth -= damage;
 			if ( CurrentHealth <= 0 ) {
 				Kill();
@@ -75,6 +78,9 @@ namespace Game.GameplayScene {
 		}
 
 		void Update() {
+			if ( !_battleManager.IsPlaying ) {
+				return;
+			}
 			if ( !_isInited ) {
 				return;
 			}
