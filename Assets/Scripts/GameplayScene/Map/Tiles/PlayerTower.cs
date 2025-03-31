@@ -1,6 +1,5 @@
 ﻿using TriInspector;
 using UnityEngine;
-using VContainer;
 
 namespace Game.GameplayScene {
 	public class PlayerTower : MonoBehaviour {

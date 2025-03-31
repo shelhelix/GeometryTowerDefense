@@ -1,6 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Unity.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using VContainer;
+using VContainer.Unity;
 
 namespace Game.GameplayScene {
 	public class TowerPlacer : MonoBehaviour {
@@ -13,8 +17,22 @@ namespace Game.GameplayScene {
 
 		public Tower     TowerPrefab;
 		public BeanTower BeanTowerPrefab;
+
+		[ReadOnly] public TowerType ActiveTowerType;
 		
 		Grid             Grid => GroundLayer.Grid;
+
+		LifetimeScope _scope;
+
+		[Inject]
+		public void Init(LifetimeScope scope) {
+			_scope = scope;
+		}
+
+		public void SelectTower(TowerType type) {
+			ActiveTowerType = type;
+		}
+		
 		
 		void Update() {
 			if ( !Input.GetMouseButtonDown(0) ) {
@@ -42,12 +60,26 @@ namespace Game.GameplayScene {
 					return;
 				}
 			}
-				
+			
+			var towerPrefab = GetTowerPrefab(ActiveTowerType);
 			var adjustedWorld = Grid.CellToWorld(cellPosition);
 			adjustedWorld += Grid.cellSize / 2;
-			var cell = Instantiate(BeanTowerPrefab, adjustedWorld, Quaternion.identity, GroundLayer.transform);
-			cell.Init();
+			var cell = Instantiate(towerPrefab, adjustedWorld, Quaternion.identity, GroundLayer.transform);
+			_scope.Container.Inject(cell);
 			TowerLayer.AddCell(cell.transform);
+		}
+
+		GameObject GetTowerPrefab(TowerType towerType) {
+			switch ( towerType ) {
+				case TowerType.Bullet:
+					return TowerPrefab.gameObject;
+				case TowerType.Laser:
+					return BeanTowerPrefab.gameObject;
+				default: {
+					Debug.LogError($"Unknown tower type {towerType}. Returning bullet tower");
+					return GetTowerPrefab(TowerType.Bullet);
+				}
+			}
 		}
 	}
 }

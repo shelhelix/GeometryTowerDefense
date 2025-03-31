@@ -2,6 +2,7 @@
 using TriInspector;
 using UnityEngine;
 using UnityEngine.VFX;
+using VContainer;
 
 namespace Game.GameplayScene {
 	public class BeanTower : MonoBehaviour {
@@ -24,7 +25,7 @@ namespace Game.GameplayScene {
 
 		Sequence _sequence;
 		
-		
+		[Inject]
 		public void Init() {
 			var initialScale = BaseView.localScale;
 			_sequence = DOTween.Sequence()
