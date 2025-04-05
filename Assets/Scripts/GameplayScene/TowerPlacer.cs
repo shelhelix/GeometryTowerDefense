@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Unity.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -19,6 +18,10 @@ namespace Game.GameplayScene {
 		public BeanTower BeanTowerPrefab;
 
 		[ReadOnly] public TowerType ActiveTowerType;
+
+		TowerType             _currentTowerPreviewType;
+		GameObject            _towerPreview;
+		ITowerPreviewModifier _towerPreviewModifier;
 		
 		Grid             Grid => GroundLayer.Grid;
 
@@ -35,38 +38,85 @@ namespace Game.GameplayScene {
 		
 		
 		void Update() {
+			TryDropSelection();
+			UpdatePreview();
+			TryPlaceTower();
+		}
+
+		void TryDropSelection() {
+			if ( Input.GetMouseButtonDown(1) ) {
+				SelectTower(TowerType.None);
+			}
+		}
+
+		void UpdatePreview() {
+			if ( ActiveTowerType == TowerType.None ) {
+				if ( _towerPreview ) {
+					Destroy(_towerPreview);
+					_towerPreview            = null;
+					_towerPreviewModifier    = null;
+					_currentTowerPreviewType = TowerType.None;
+				}
+				return;
+			}
+			if ( _currentTowerPreviewType != ActiveTowerType ) {
+				Destroy(_towerPreview);
+				_towerPreview            = Instantiate(GetTowerPrefab(ActiveTowerType));
+				_towerPreviewModifier    = _towerPreview.GetComponentInChildren<ITowerPreviewModifier>(true);
+				_currentTowerPreviewType = ActiveTowerType;
+			}
+			_towerPreviewModifier.Show(CanPlaceTower());
+			var worldPosition = GetMouseClampedPosition();
+			_towerPreview.transform.position = worldPosition;
+		}
+
+		bool CanPlaceTower() {
+			var cellPosition = GetMouseCellPosition();
+			if ( TowerLayer.HasCell(cellPosition) ) {
+				return false;
+			}
+			if ( !GroundLayer.HasCell(cellPosition) ) {
+				return false;
+			}
+			foreach ( var spawnPoint in SpawnPoints ) {
+				if ( Pathfinder.CanFindPath(spawnPoint.transform, EndPoint, new List<Vector3Int> { cellPosition }) ) {
+					continue;
+				}
+				return false;
+			}
+			return true;
+		}
+		
+		void TryPlaceTower() {
 			if ( !Input.GetMouseButtonDown(0) ) {
+				return;
+			}
+			if ( ActiveTowerType == TowerType.None ) {
 				return;
 			}
 			if ( EventSystem.current.IsPointerOverGameObject() ) {
 				return;
 			}
-			
+			if ( !CanPlaceTower() ) {
+				_towerPreviewModifier.SignalCantPlace();
+				return;
+			}
+			var towerPrefab   = GetTowerPrefab(ActiveTowerType);
+			var cell = Instantiate(towerPrefab, GetMouseClampedPosition(), Quaternion.identity, GroundLayer.transform);
+			_scope.Container.InjectGameObject(cell);
+			TowerLayer.AddCell(cell.transform);
+		}
+		
+		Vector3Int GetMouseCellPosition() {
 			var worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			worldPosition.z = 0;
-			var cellPosition  = Grid.WorldToCell(worldPosition);
-			if ( TowerLayer.HasCell(cellPosition) ) {
-				Debug.LogError("Can't create tower here. Cell is already used.");
-				return;
-			}
-			if ( !GroundLayer.HasCell(cellPosition) ) {
-				Debug.LogError("Can't create tower here. Can't find a ground cell.");
-				return;
-			}
+			return Grid.WorldToCell(worldPosition);
+		}
 
-			foreach ( var spawnPoint in SpawnPoints ) {
-				if ( !Pathfinder.CanFindPath(spawnPoint.transform, EndPoint, new List<Vector3Int>{cellPosition}) ) {
-					Debug.LogError("Path will be blocked from point {spawnPoint}");
-					return;
-				}
-			}
-			
-			var towerPrefab = GetTowerPrefab(ActiveTowerType);
+		Vector3 GetMouseClampedPosition() {
+			var cellPosition  = GetMouseCellPosition();
 			var adjustedWorld = Grid.CellToWorld(cellPosition);
-			adjustedWorld += Grid.cellSize / 2;
-			var cell = Instantiate(towerPrefab, adjustedWorld, Quaternion.identity, GroundLayer.transform);
-			_scope.Container.Inject(cell);
-			TowerLayer.AddCell(cell.transform);
+			return adjustedWorld + Grid.cellSize / 2;
 		}
 
 		GameObject GetTowerPrefab(TowerType towerType) {
