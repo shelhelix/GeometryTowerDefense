@@ -3,22 +3,29 @@ using TMPro;
 using TriInspector;
 using UnityEngine;
 using UnityEngine.UI;
+using VContainer;
 
 namespace Game.GameplayScene {
 	public class TowerSelectionButton : MonoBehaviour {
-		public            TowerType     TowerType;
-		[Required] public TowerPlacer   TowerPlacer;
-		[Required] public ButtonWrapper Button;
-		[Required] public Image         ButtonBackground;
-		[Required] public TMP_Text      ButtonText;
+		[SerializeField]           TowerType     TowerType;
+		[Required, SerializeField] ButtonWrapper Button;
+		[Required, SerializeField] Image         ButtonBackground;
+		[Required, SerializeField] TMP_Text      ButtonText;
+		[Required, SerializeField] TMP_Text      PriceText;
 
-		void Start() {
-			Button.RemoveAllAndAddListener(() => TowerPlacer.SelectTower(TowerType));
+		TowerPlacer _towerPlacer;
+
+		[Inject]
+		void Init(TowerInfoContainer infoContainer, TowerPlacer towerPlacer) {
+			_towerPlacer = towerPlacer;
+			var towerInfo = infoContainer.Towers.Find(x => x.TowerType == TowerType);
+			Button.RemoveAllAndAddListener(() => _towerPlacer.SelectTower(TowerType));
 			ButtonText.text = TowerType.ToString();
+			PriceText.text = towerInfo?.Cost.ToString() ?? "N/A";
 		}
 
 		void Update() {
-			ButtonBackground.color = TowerPlacer.ActiveTowerType == TowerType ? Color.green : Color.white;
+			ButtonBackground.color = _towerPlacer.ActiveTowerType == TowerType ? Color.green : Color.white;
 		}
 	}
 }

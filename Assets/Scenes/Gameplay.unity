@@ -7261,6 +7261,8 @@ MonoBehaviour:
   - {fileID: 472560980}
   - {fileID: 922091945}
   BattleManager: {fileID: 891842035}
+  TowerInfoContainer: {fileID: 11400000, guid: dac604dc9ff163e4f88652de0444a8d2, type: 2}
+  TowerPlacer: {fileID: 2083452393}
 --- !u!1 &1931761930
 GameObject:
   m_ObjectHideFlags: 0

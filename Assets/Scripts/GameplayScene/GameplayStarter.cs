@@ -13,12 +13,13 @@ namespace Game.GameplayScene {
 		[Required] public List<MapLayer> Layers;
 
 		[Inject]
-		public void Init(BgmManager bgmManager) {
+		public void Init(BgmManager bgmManager, CurrencyManager currencyManager) {
 			foreach ( var layer in Layers ) {
 				layer.Init();
 			}
 			bgmManager.PlayBgms(Bgms);
 			mapAnimator.ShowField().Forget();
+			currencyManager.AddGold(100);
 		}
 	}
 }

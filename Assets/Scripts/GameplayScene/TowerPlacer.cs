@@ -25,11 +25,15 @@ namespace Game.GameplayScene {
 		
 		Grid             Grid => GroundLayer.Grid;
 
-		LifetimeScope _scope;
-
+		LifetimeScope      _scope;
+		TowerInfoContainer _towerInfoContainer;
+		CurrencyManager    _currencyManager;
+		
 		[Inject]
-		public void Init(LifetimeScope scope) {
-			_scope = scope;
+		public void Init(LifetimeScope scope, TowerInfoContainer towerInfoContainer, CurrencyManager currencyManager) {
+			_scope              = scope;
+			_towerInfoContainer = towerInfoContainer;
+			_currencyManager    = currencyManager;
 		}
 
 		public void SelectTower(TowerType type) {
@@ -84,6 +88,14 @@ namespace Game.GameplayScene {
 				}
 				return false;
 			}
+			var towerInfo = _towerInfoContainer.GetTowerInfo(ActiveTowerType);
+			if ( towerInfo == null ) {
+				Debug.LogError($"Tower info for {ActiveTowerType} is null");
+				return false;
+			}
+			if ( _currencyManager.CurrentGold < towerInfo.Cost ) {
+				return false;
+			}
 			return true;
 		}
 		
@@ -105,6 +117,8 @@ namespace Game.GameplayScene {
 			var cell = Instantiate(towerPrefab, GetMouseClampedPosition(), Quaternion.identity, GroundLayer.transform);
 			_scope.Container.InjectGameObject(cell);
 			TowerLayer.AddCell(cell.transform);
+			var towerInfo = _towerInfoContainer.GetTowerInfo(ActiveTowerType);
+			_currencyManager.SpendGold(towerInfo.Cost);
 		}
 		
 		Vector3Int GetMouseCellPosition() {
