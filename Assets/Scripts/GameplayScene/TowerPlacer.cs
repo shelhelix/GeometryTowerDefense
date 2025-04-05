@@ -1,12 +1,16 @@
 ﻿using System.Collections.Generic;
-using Unity.Collections;
+using System.Linq;
+using TriInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using VContainer;
 using VContainer.Unity;
 
 namespace Game.GameplayScene {
 	public class TowerPlacer : MonoBehaviour {
+		[Required, SerializeField] GraphicRaycaster Raycaster;
+		
 		public MapLayer   GroundLayer;
 		public MapLayer   TowerLayer;
 		
@@ -106,7 +110,14 @@ namespace Game.GameplayScene {
 			if ( ActiveTowerType == TowerType.None ) {
 				return;
 			}
-			if ( EventSystem.current.IsPointerOverGameObject() ) {
+			
+			var raycastResults = new List<RaycastResult>();
+			var eventData = new PointerEventData(EventSystem.current) {
+				position = Input.mousePosition
+			};
+			Raycaster.Raycast(eventData, raycastResults);
+			var overlappedObject = raycastResults.FirstOrDefault();
+			if ( overlappedObject.gameObject && !overlappedObject.gameObject.TryGetComponent<Canvas>(out _) ) {
 				return;
 			}
 			if ( !CanPlaceTower() ) {

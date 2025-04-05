@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 namespace Game.GlobalContext {
 	public class SceneLoader {
-		public const string GameplayScene = "Gameplay";
+		public const string GameplayScene = "Level1";
 		public const string MainMenuScene = "MainMenu";
 		
 		readonly ISceneTransition _transition;
