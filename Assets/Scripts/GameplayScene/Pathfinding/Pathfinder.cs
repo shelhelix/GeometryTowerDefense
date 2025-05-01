@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TriInspector;
 using UnityEngine;
 
 namespace Game.GameplayScene {
@@ -19,8 +20,8 @@ namespace Game.GameplayScene {
 	}
 	
 	public class Pathfinder : MonoBehaviour {
-		public MapLayer GroundLayer;
-		public MapLayer TowersLayer;
+		[Required, SerializeField] BaseMapLayer TowersLayer;
+		[Required, SerializeField] BaseMapLayer GroundLayer;
 
 		Grid Grid => GroundLayer.Grid;
 		

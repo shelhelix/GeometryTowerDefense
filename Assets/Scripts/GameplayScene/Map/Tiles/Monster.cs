@@ -28,7 +28,7 @@ namespace Game.GameplayScene {
 		public bool IsDying { get; private set; }
 
 		public void Init(BattleManager battleManager, CurrencyManager currencyManager, List<Vector3> path) {
-			if ( path.Count == 0 ) {
+			if ( (path == null) || (path.Count == 0) ) {
 				Debug.LogError("Something strange happened. Path is empty. Can't init monster");
 				return;
 			}
@@ -49,6 +49,10 @@ namespace Game.GameplayScene {
 		}
 
 		public void TakeDamage(float damage) {
+			if ( !_isInited ) {
+				return;
+			}
+			
 			if ( !_battleManager.IsPlaying ) {
 				return;
 			}
@@ -60,7 +64,7 @@ namespace Game.GameplayScene {
 
 		void OnDestroy() {
 			_sequence?.Kill();
-			_battleManager.RegisterMonsterDeath();
+			_battleManager?.RegisterMonsterDeath();
 		}
 
 		public void Kill() {
@@ -78,10 +82,10 @@ namespace Game.GameplayScene {
 		}
 
 		void Update() {
-			if ( !_battleManager.IsPlaying ) {
+			if ( !_isInited ) {
 				return;
 			}
-			if ( !_isInited ) {
+			if ( !_battleManager.IsPlaying ) {
 				return;
 			}
 			var targetPoint = _currentPath[_lastPointIndex+1];

@@ -7,13 +7,10 @@ using UnityEngine;
 
 namespace Game.GameplayScene {
 	public class MapAnimator : MonoBehaviour {
-		[Required] public MapLayer BackgroundLayer;
 		[Required] public MapLayer TowerLayer;
 		
 		public async UniTask ShowField() {
-			HideLayerCells(BackgroundLayer);
 			HideLayerCells(TowerLayer);
-			await ShowLayer(BackgroundLayer);
 			await ShowLayer(TowerLayer);
 		}
 

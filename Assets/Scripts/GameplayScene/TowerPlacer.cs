@@ -11,15 +11,15 @@ namespace Game.GameplayScene {
 	public class TowerPlacer : MonoBehaviour {
 		[Required, SerializeField] GraphicRaycaster Raycaster;
 		
-		public MapLayer   GroundLayer;
-		public MapLayer   TowerLayer;
+		[Required, SerializeField] BaseMapLayer GroundLayer;
+		[Required, SerializeField] MapLayer     TowerLayer;
 		
-		public Pathfinder           Pathfinder;
-		public List<MonsterSpawner> SpawnPoints;
-		public Transform            EndPoint;
+		[Required, SerializeField] Pathfinder           Pathfinder;
+		[Required, SerializeField] List<MonsterSpawner> SpawnPoints;
+		[Required, SerializeField] Transform            EndPoint;
 
-		public Tower     TowerPrefab;
-		public BeanTower BeanTowerPrefab;
+		[Required, SerializeField] Tower     TowerPrefab;
+		[Required, SerializeField] BeanTower BeanTowerPrefab;
 
 		[ReadOnly] public TowerType ActiveTowerType;
 
