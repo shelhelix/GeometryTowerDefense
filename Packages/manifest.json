@@ -1,22 +1,20 @@
 {
   "dependencies": {
     "com.codewriter.triinspector": "https://github.com/codewriter-packages/Tri-Inspector.git",
-    "com.cysharp.unitask": "2.5.0",
+    "com.cysharp.unitask": "2.5.10",
     "com.ems.main-scene-auto-loading": "https://github.com/shelhelix/unity-main-scene-auto-loading-fork.git?path=/Packages/Ems.MainSceneAutoLoading",
     "com.jsteinhauer.unitydomainreloadhelper": "https://github.com/joshcamas/unity-domain-reload-helper.git",
     "com.luca3317.tmpeffects": "https://github.com/Luca3317/TMPEffects.git?path=/Package",
     "com.ultrashel.asynctimer": "https://github.com/shelhelix/AsyncTimer.git",
     "com.ultrashel.gamecomponentattributes": "https://github.com/shelhelix/GameComponentAttributes.git",
     "com.unity.feature.2d": "2.0.1",
-    "com.unity.ide.rider": "3.0.35",
-    "com.unity.ide.visualstudio": "2.0.23",
+    "com.unity.ide.rider": "3.0.36",
     "com.unity.render-pipelines.universal": "17.0.4",
     "com.unity.test-framework": "1.5.1",
-    "com.unity.timeline": "1.8.7",
+    "com.unity.timeline": "1.8.8",
     "com.unity.ugui": "2.0.0",
     "com.unity.visualeffectgraph": "17.0.4",
-    "com.unity.visualscripting": "1.9.6",
-    "jp.hadashikick.vcontainer": "1.16.2",
+    "jp.hadashikick.vcontainer": "1.16.9",
     "com.unity.modules.accessibility": "1.0.0",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",
@@ -46,9 +44,7 @@
     "com.unity.modules.unitywebrequestwww": "1.0.0",
     "com.unity.modules.vehicles": "1.0.0",
     "com.unity.modules.video": "1.0.0",
-    "com.unity.modules.vr": "1.0.0",
-    "com.unity.modules.wind": "1.0.0",
-    "com.unity.modules.xr": "1.0.0"
+    "com.unity.modules.wind": "1.0.0"
   },
   "scopedRegistries": [
     {
