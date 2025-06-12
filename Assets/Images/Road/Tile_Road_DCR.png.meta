@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 503d8cfa4bcb128478d056749e8d879d
+guid: 4103ba1f34eb6d04c886328f4d9cb5bc
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5297786972165177653
-    second: road_0_0
+      213: -4836170053344208734
+    second: Tile_Road_DCR_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,12 +46,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 200
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -152,13 +152,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: road_0_0
+      name: Tile_Road_DCR_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 79
         y: 0
-        width: 200
-        height: 200
+        width: 21
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -167,8 +167,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 531099bae25858940800000000000000
-      internalID: 5297786972165177653
+      spriteID: 2a85909a5f872ecb0800000000000000
+      internalID: -4836170053344208734
       vertices: []
       indices: 
       edges: []
@@ -177,7 +177,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -187,7 +187,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      road_0_0: 5297786972165177653
+      Tile_Road_DCR_0: -4836170053344208734
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
